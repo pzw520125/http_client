@@ -14,16 +14,16 @@ This library  implements winhttp API windows for a simple package, so that the o
 #include "http.h"
 int main()
 {
-	CWinHttp *http = new CWinHttp();
-	BOOL bResult = http->OpenSession("Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; KB974487)");
-	bResult = http->SetTimeout(3000, 3000, 3000, 3000);
-	bResult = http->OpenConnect("http://www.baidu.com/");
-	bResult = http->OpenRequest();
-	bResult = http->SetReferer("http://www.baidu.com");
-	bResult = http->SetLocal(false);//禁止重定向
-	bResult = http->SetCookie("name=value");
-	bResult = http->Send();
-	std::vector<BYTE> response = http->GetResponseBody();
+	CWinHttp http;
+	BOOL bResult = http.OpenSession("Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; KB974487)");
+	bResult = http.SetTimeout(3000, 3000, 3000, 3000);
+	bResult = http.OpenConnect("http://www.baidu.com/");
+	bResult = http.OpenRequest();
+	bResult = http.SetReferer("http://www.baidu.com");
+	bResult = http.SetLocal(false);//禁止重定向
+	bResult = http.SetCookie("name=value");
+	bResult = http.Send();
+	std::vector<BYTE> response = http.GetResponseBody();
 
 	std::string result;
 	result.insert(result.begin(), response.begin(), response.end());
@@ -31,19 +31,19 @@ int main()
 	result = CEncoder::U2A_(result);//utf-8 convert to gb2312
 	printf("%s \n", result.c_str());
 
-	std::string headers = http->GetResponseHeaders();
+	std::string headers = http.GetResponseHeaders();
 	printf("headers %s \n", headers.c_str());
 
-	std::string statusCode = http->GetResponseHeaderValue(WINHTTP_QUERY_STATUS_CODE);
+	std::string statusCode = http.GetResponseHeaderValue(WINHTTP_QUERY_STATUS_CODE);
 	printf("statusCode %s \n", statusCode.c_str());
 
-	std::string local = http->GetLocal();
+	std::string local = http.GetLocal();
 	printf("local %s \n", local.c_str());
 
-	std::string cookies = http->GetCookie();
+	std::string cookies = http.GetCookie();
 	printf("cookies %s \n", cookies.c_str());
 
-	cookies = http->MergeCookie(cookies, "BAIDUID=26989AD75E0ACAE255E6DC5614A95D4E:FG=test;");
+	cookies = http.MergeCookie(cookies, "BAIDUID=26989AD75E0ACAE255E6DC5614A95D4E:FG=test;");
 	printf("merge cookies %s \n", cookies.c_str());
 
 	getchar();
