@@ -5,7 +5,7 @@ This library  implements winhttp API windows for a simple package, so that the o
 
 <a href='https://github.com/ybhacker/encoder'>encoder.h</a>
 
-<a href='https://https://github.com/ybhacker/string-utils'>stringext.h</a>
+<a href='https://github.com/ybhacker/string-utils'>stringext.h</a>
 
 
 ## Test
